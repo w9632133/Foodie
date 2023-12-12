@@ -25,4 +25,6 @@
     <string name="title_activity_login_acitivity">LoginAcitivity</string>
     <string name="title_activity_capture_profile">captureProfileActivity</string>
     <string name="title_activity_food_item">FoodItemActivity</string>
+    <string name="title_activity_locate_resturant">LocateResturantActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

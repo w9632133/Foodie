@@ -55,12 +55,10 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.launch
-import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.foodie.screens.Cart
+import com.example.foodie.screens.CartScreen
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -190,7 +188,7 @@ class DashboardActivity : FragmentActivity() {
             }
 
             composable(NavigationItem.Notifications.route) {
-                Cart()
+                CartScreen(this@DashboardActivity)
             }
 
             composable(NavigationItem.Settings.route) {
@@ -431,17 +429,7 @@ class DashboardActivity : FragmentActivity() {
                     contentScale = ContentScale.Crop
 
                 )
-                Icon(
-                    imageVector = Icons.Default.Edit,
-                    contentDescription = null,
-                    tint = MaterialTheme.colors.onPrimary,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clip(CircleShape)
-                        .background(Color.Black)
-                        .clickable { /* Handle edit profile picture */ }
-                        .padding(8.dp)
-                )
+
             }
 
             // User Information

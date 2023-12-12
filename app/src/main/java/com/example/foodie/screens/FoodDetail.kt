@@ -121,7 +121,8 @@ fun FoodDetailScreen(foodItem: ItemModels) {
             onClick = {
                 var uid = FirebaseAuth.getInstance().getCurrentUser()?.getUid()
                 if (uid != null) {
-                    val data = CartItem(name = foodItem.name, description = foodItem.description, quatity = quantity, price = foodItem.price, image_url = foodItem.image_url)
+                    val item_id = System.currentTimeMillis().toString()
+                    val data = CartItem(name = foodItem.name, description = foodItem.description, quatity = quantity, price = foodItem.price, image_url = foodItem.image_url, item_id = item_id)
                     FirebaseFirestore
                         .getInstance()
                         .collection("User")

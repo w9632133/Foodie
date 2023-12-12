@@ -120,10 +120,10 @@ class SignUpAcitivity : ComponentActivity() {
                     DividerTextComponent()
 
                     ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
-                            val intent = Intent(this@SignUpAcitivity, LoginAcitivity::class.java)
-                            startActivity(intent)
-                            // Finish the current activity if needed
-                            finish()
+                                val intent = Intent(this@SignUpAcitivity, LoginAcitivity::class.java)
+                                startActivity(intent)
+                                // Finish the current activity if needed
+                                finish()
                     })
                 }
 

@@ -18,8 +18,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddShoppingCart
 import androidx.compose.material.icons.filled.Remove
+
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -123,7 +123,11 @@ class FoodItemActivity : ComponentActivity() {
                         }
                     }
                 ) {
-                    Icon(imageVector = Icons.Default.Remove, contentDescription = null)
+                    Icon(
+                        imageVector = Icons.Default.Remove, // Use the appropriate icon
+                        contentDescription = "Remove"
+                    )
+
                 }
 
                 Text(
@@ -138,7 +142,11 @@ class FoodItemActivity : ComponentActivity() {
                         totalPrice = totalPrice + foodItem.price
                     }
                 ) {
-                    Icon(imageVector = Icons.Default.AddShoppingCart, contentDescription = null)
+                    Icon(
+                        painter = painterResource(id = R.drawable.plus), // Use the appropriate icon
+                        contentDescription = "Remove"
+                    )
+
                 }
             }
 
@@ -155,13 +163,20 @@ class FoodItemActivity : ComponentActivity() {
                     Log.e("manan","hello world")
                     var uid = FirebaseAuth.getInstance().getCurrentUser()?.getUid()
                     if (uid != null) {
-                        val data = CartItem(name = foodItem.name, description = foodItem.description, quatity = quantity, price = foodItem.price, image_url = foodItem.image_url)
+                        val timestamp = System.currentTimeMillis()
+                        val data = CartItem(name = foodItem.name, description = foodItem.description, quatity = quantity, price = foodItem.price, image_url = foodItem.image_url,
+                            item_id = timestamp.toString())
                         FirebaseFirestore
                             .getInstance()
                             .collection("User")
                             .document(uid)
                             .collection("Cart")
-                            .add(data)
+                            .document(timestamp.toString())
+                            .set(data).addOnCompleteListener {
+                                val intent = Intent(this@FoodItemActivity, DashboardActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                     }
 
                     val intent = Intent(this@FoodItemActivity, DashboardActivity::class.java)
@@ -172,7 +187,7 @@ class FoodItemActivity : ComponentActivity() {
                     .fillMaxWidth()
                     .height(56.dp)
             ) {
-                Icon(imageVector = Icons.Default.AddShoppingCart, contentDescription = null)
+
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = "Add to Cart")
             }
